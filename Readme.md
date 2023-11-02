@@ -1,27 +1,51 @@
 ## Discussion app
 *page divided in -> 2 parts*
-**rightPane** -> 
-                Question form
-                  -> h1 (Welcome to Discussion Portal !)
-                  -> h6 (Enter a subject and question to get started)
-                  -> input-subject
-                  -> input-question
-                  -> submit (btn)
-                Question and response
+**RightPane** -> 
+                QuestionForm
+
+                  ->Heading
+
+                    -> h1 (Welcome to Discussion Portal !)
+                    -> h6 (Enter a subject and question to get started)
+
+                  ->SubjectInput
+
+                    -> input-subject
+                    -> input-question
+
+                  ->Button
+
+                    -> submit (btn)
+
+                QuestionAndResponse
+
                   -> Question
                     -> heading
                     -> question
                     -> Resolve (btn)
+
                   -> Response
                     -> Name (h)
                     -> Comment (p)
-                  -> Add response
+
+                  -> AddResponse
                     -> input name (text)
                     -> input comment (text area)
-**leftPane** ->
-                buttons
-                  -> New Question Form (btn)
+
+**LeftPane** ->
+                TopBar
+
+                  -> New Question Form (btn) (linked with the Question form in right pane)
                   -> Search questions (input box)
-                List Of Questions
+
+                QuestionsList
+
                       -> Subject
                       -> Question
+
+
+
+**Working** ->
+              
+
+              
