@@ -6,7 +6,7 @@ import QuestionAndResponse from "../Right_Pane_Components/QuestionAndResponse";
 function RightPane() {
     return (
         <div className="right-pane">
-            <QuestionForm />
+            <QuestionAndResponse />
         </div>
     )
 }

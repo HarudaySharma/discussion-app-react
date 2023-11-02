@@ -4,9 +4,7 @@ function TopBar() {
     function QuestionFormShowBtn() {
         return (
             // on click will show the Question form in the right pane
-            <button
-                classsName="blue-btn"
-            >
+            <button>
                 New Question Form
             </button>
         )
@@ -23,7 +21,7 @@ function TopBar() {
         )
     }
     return (
-        <div>
+        <div className="top-bar">
             <QuestionFormShowBtn />
             <SearchQuestions />
         </div>

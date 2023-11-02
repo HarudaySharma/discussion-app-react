@@ -4,9 +4,9 @@ function QuestionForm() {
     function questionAdd() { }
     function Heading() {
         return (
-            <div>
+            <div className="heading">
                 <h1>Welcome to Discussion Portal !</h1>
-                <h6>Enter a subject and question to get started</h6>
+                <h4>Enter a subject and question to get started</h4>
             </div>
         )
     }
@@ -16,9 +16,9 @@ function QuestionForm() {
         const { question, setQuestion } = useState("");
 
         return (
-            <div>
+            <div className="subject-input">
                 <input type="text"
-                    placeholder="subject"
+                    placeholder="Subject"
                     onChange={(e) => setSubject(e.target.value)}
                 >
                 </input>
@@ -34,7 +34,9 @@ function QuestionForm() {
     }
     function Button() {
         return (
-            <button type="button" onClick={questionAdd}>Submit</button>
+            <div className="submit-btn" onClick={questionAdd}>
+                Submit
+            </div>
         )
     }
 

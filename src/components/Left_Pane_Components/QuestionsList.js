@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 
+
 function QuestionsList() {
-    listofquestions = [
+    let listofquestions = [
         <div className="questions-list">
             <h2>questionHeading</h2>
             <p>questionText</p>
         </div>,
-        <div>
+        <div className="questions-list">
             <h2>questionHeading</h2>
             <p>questionText</p> 
         </div>

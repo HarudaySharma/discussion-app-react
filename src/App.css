@@ -1,5 +1,124 @@
 .App {
   display: flex;
-  width: 100%;
+  border: 2px solid black;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: large;
+  gap: 1em;
 }
+
+.questions-list {
+  padding: 4px;
+  margin-top: 4px;
+  border-bottom: 2px solid black;
+}
+
+.background-gray {
+  background-color: rgb(217, 214, 214);
+}
+
+.left-pane {
+  flex: 2 1 30%;
+ 
+}
+
+.right-pane {
+  flex: 1 1 50%;
+  padding-right: 1em;
+  margin-top: 1em;
+  
+}
+
+
+/* Question form */
+
+
+
+.right-pane .question-form,
+.right-pane .question-form>div {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+/* .right-pane .question-form {
+  flex: 1 1 45%;
+} */
+
+
+.right-pane .question-form .heading>* {
+  margin: 0;
+  margin-bottom: 4px;
+  /* border: 2px solid red; */
+}
+
+.right-pane .question-form .subject-input>* {
+  margin: 0.5em 0;
+
+}
+
+.right-pane .question-form .subject-input input {
+  width: 30%;
+  height: 1.8rem;
+  padding: 2px;
+}
+
+.right-pane .question-form .subject-input textarea {
+  resize: none;
+  height: 8rem;
+
+}
+
+.submit-btn, .resolve-btn {
+  width: 20%;
+  padding: 4px;
+  box-sizing: border-box;
+  background-color: rgb(50, 50, 250);
+  color: white;
+  text-align: center;
+  border-radius: 0.2em;
+  align-self: flex-end;
+  cursor: pointer;
+
+}
+
+.submit-btn:hover, .resolve-btn:hover {
+  background-color: rgb(88, 88, 255);
+}
+
+
+
+.left-pane {
+  display: flex;
+  flex-flow: column wrap;
+  border-right: 1px solid gray;
+}
+
+.left-pane .top-bar {
+  box-sizing: border-box;
+  display: flex;
+  gap: 1em;
+  justify-content: space-between;
+  margin: 0.4em;
+  height: 2rem;
+}
+.left-pane .top-bar * {
+  padding: 0.4em;
+  border-radius: 4px;
+}
+
+/* .submit-btn {
+  background-color: rgb(60, 60, 247);
+  color: white;
+  cursor: pointer;
+
+} */
+
+
+/* Question and Response */
+.right-pane .question-and-response,
+.right-pane .question-and-response>div {
+  display: flex;
+  flex-flow: column wrap;
+}
+
+
 

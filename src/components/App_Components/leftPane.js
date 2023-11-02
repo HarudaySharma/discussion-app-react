@@ -15,7 +15,7 @@ import TopBar from "../Left_Pane_Components/TopBar";
 
 function LeftPane() {
     return (
-        <div>
+        <div className="left-pane">
             <TopBar />
             <QuestionsList />
         </div>

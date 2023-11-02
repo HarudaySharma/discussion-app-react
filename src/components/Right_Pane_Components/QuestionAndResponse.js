@@ -4,18 +4,18 @@ function QuestionAndResponse(props) {
     function Question(props) {
         function Heading() {
             return (
-                <h1>{props.questionHeading}</h1>
+                <h1>{props.questionHeading}questionHeading</h1>
             )
         }
         function Paragraph() {
             return (
-                <p>{props.questionText}</p>
+                <p>{props.questionText}questionText</p>
             )
         }
         function ResolveBtn() {
             return (
-                <button
-                    onClick={"hello"}
+                <button className="reslove-btn"
+                    // onClick
                 >
                     Resolve
                 </button>
@@ -66,16 +66,25 @@ function QuestionAndResponse(props) {
                 </textarea>
             )
         }
+        function Button() {
+            return (
+                // onclick 
+                <div className="submit-btn">
+                    Submit
+                </div>
+            )
+        }
         return (
             <div>
                 <h1>Add Response</h1>
                 <ResponsderName />
                 <ResponsderComment />
+                <Button/>
             </div>
         )
     }
     return (
-        <div>
+        <div className="question-and-response">
             <Question />
             <Response />
             <AddResponse />

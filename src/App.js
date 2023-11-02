@@ -6,8 +6,8 @@ import LeftPane from './components/App_Components/leftPane';
 function App() {
   return (
     <div className="App">
-      <RightPane />
       <LeftPane />
+      <RightPane />
     </div>
   );
 }
