@@ -1,9 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
+import RightPane from './components/rightPane';
 
 function App() {
   return (
     <div className="App">
+      <RightPane/>
     </div>
   );
 }

@@ -1,6 +1,6 @@
-Discussion app
-* page divided in -> 2 parts
-** rightPane -> 
+## Discussion app
+*page divided in -> 2 parts*
+**rightPane** -> 
                 Question form
                   -> h1 (Welcome to Discussion Portal !)
                   -> h6 (Enter a subject and question to get started)
@@ -18,7 +18,7 @@ Discussion app
                   -> Add response
                     -> input name (text)
                     -> input comment (text area)
-    leftPane ->
+**leftPane** ->
                 buttons
                   -> New Question Form (btn)
                   -> Search questions (input box)
