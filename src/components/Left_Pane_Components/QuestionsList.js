@@ -1,21 +1,25 @@
 import React, { useState } from "react";
 
 
-function QuestionsList() {
-    let listofquestions = [
-        <div className="questions-list">
-            <h2>questionHeading</h2>
-            <p>questionText</p>
-        </div>,
-        <div className="questions-list">
-            <h2>questionHeading</h2>
-            <p>questionText</p> 
-        </div>
-    ]
+function QuestionsList({ questionArray, handleQuestionClick}) {
+
+    function QuestionTemplate({ title, content }) {
+        
+        return (
+            <div onClick={() => handleQuestionClick(title)}>
+                <h2>{title}</h2>
+                <p>{content}</p>
+            </div>
+        )
+    }
+
     return (
         <div className="background-gray">
-            {/* will be an array of divs c */}
-            {listofquestions}
+            {
+                questionArray.map((object, index) => {
+                    return <QuestionTemplate key={index} title={object.Subject} content={object.Question} />
+                })
+            }
         </div>
     )
 }

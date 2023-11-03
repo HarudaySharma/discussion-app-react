@@ -46,6 +46,22 @@
 
 
 **Working** ->
+              QuestionObject = {
+                Subject: ,
+                Question: ,
+                responses: [
+                  {
+                    Name: ,
+                    Comment:
+                  }
+                ]
+              }
+             DiscussionApp = [
+              {
+                
+              }
+             ]
               
 
-              
+
+        Need a communication b/w left and right pane

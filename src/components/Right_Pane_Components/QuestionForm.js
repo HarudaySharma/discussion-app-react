@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
-function QuestionForm() {
-    function questionAdd() { }
+function QuestionForm({ questionAdd }) {
     function Heading() {
         return (
             <div className="heading">
@@ -11,14 +10,23 @@ function QuestionForm() {
         )
     }
     function SubjectInput() {
-        // using hooks
-        const { subject, setSubject } = useState("");
-        const { question, setQuestion } = useState("");
 
+        const [subject, setSubject] = useState('');
+        const [question, setQuestion] = useState('');
+
+
+        function handleQuestionAdd() {
+            const newQuestion = {
+                Subject: subject,
+                Question: question
+            }
+            questionAdd(newQuestion);
+        }
         return (
             <div className="subject-input">
                 <input type="text"
                     placeholder="Subject"
+
                     onChange={(e) => setSubject(e.target.value)}
                 >
                 </input>
@@ -29,22 +37,16 @@ function QuestionForm() {
                     onChange={(e) => setQuestion(e.target.value)}
                 >
                 </textarea>
+                <div className="submit-btn" onClick={handleQuestionAdd}>
+                    Submit
+                </div>
             </div>
         )
     }
-    function Button() {
-        return (
-            <div className="submit-btn" onClick={questionAdd}>
-                Submit
-            </div>
-        )
-    }
-
     return (
         <div className="question-form">
             <Heading />
             <SubjectInput />
-            <Button />
         </div>
     )
 }

@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 
 import QuestionForm from "../Right_Pane_Components/QuestionForm";
 import QuestionAndResponse from "../Right_Pane_Components/QuestionAndResponse";
 
-function RightPane() {
+function RightPane({ questionArray, switchPane, questionAdd }) {
     return (
         <div className="right-pane">
-            <QuestionAndResponse />
+            {switchPane == -1 ?
+                <QuestionForm questionAdd={questionAdd} /> :
+                <QuestionAndResponse questionArray={questionArray} index={switchPane} />
+            }
         </div>
     )
 }

@@ -1,21 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
 
-function QuestionAndResponse(props) {
-    function Question(props) {
+
+
+function fetchResponsesFromLS(qObj) {
+    if (!localStorage.getItem("Discussion-Form")) {
+        return [];
+    }
+    let allQuestions = JSON.parse(localStorage.getItem("Discussion-Form"))
+    let questionObj = allQuestions.find((obj) => obj.Heading == qObj.Heading);
+    return questionObj.responses;
+}
+
+
+
+function QuestionAndResponse({ questionArray, index }) {
+    const [responseArray, setResponseArray] = useState(fetchResponsesFromLS(questionArray[index]));
+    function Question({ heading }) {
         function Heading() {
             return (
-                <h1>{props.questionHeading}questionHeading</h1>
+                <h1>{heading}</h1>
             )
         }
-        function Paragraph() {
+        function Paragraph({ text }) {
             return (
-                <p>{props.questionText}questionText</p>
+                <p>{text}</p>
             )
         }
         function ResolveBtn() {
             return (
                 <button className="reslove-btn"
-                    // onClick
                 >
                     Resolve
                 </button>
@@ -25,28 +38,48 @@ function QuestionAndResponse(props) {
             // the values for heading and Paragraph provided by the props
             <div>
                 <h1>Question</h1>
-                <Heading heading={props.questionHeading} />
-                <Paragraph text={props.questionText} />
+                <Heading heading={questionArray[index].Subject} />
+                <Paragraph text={questionArray[index].Question} />
                 <ResolveBtn />
             </div>
         )
     }
-    function Response(responses) {
-
+    function Response() {
+        function ResponseTemplate({ Rname, Rcomment }) {
+            return (
+                <div>
+                    <h4>{Rname}</h4>
+                    <p>{Rcomment}</p>
+                </div>
+            )
+        }
         return (
             <div>
-                <h1>Resonse</h1>
-                <p>
-                    Will contain all the responses of that question
-                    Name : responses.name
-                    Response : responses.comment
-                </p>
+                <h1>Responses</h1>
+                {
+                    responseArray.map((response, index) => {
+                        return <ResponseTemplate key={index} Rname={response.Name} Rcomment={response.Comment} />
+                    })
+                }
             </div>
         )
     }
+
     function AddResponse() {
-        const { name, setName } = useState('');
-        const { comment, setComment } = useState('');
+
+        const [name, setName] = useState('');
+        const [comment, setComment] = useState('');
+
+        function addToResponseArray(newResponse) {
+            setResponseArray([...responseArray, newResponse])
+        }
+        function handleRespondSubmit() {
+            let responseObject = {
+                Name: name,
+                Comment: comment
+            }
+            addToResponseArray(responseObject);
+        }
         function ResponsderName() {
             return (
                 <input
@@ -68,8 +101,7 @@ function QuestionAndResponse(props) {
         }
         function Button() {
             return (
-                // onclick 
-                <div className="submit-btn">
+                <div className="submit-btn" onclick={handleRespondSubmit} >
                     Submit
                 </div>
             )
@@ -79,7 +111,7 @@ function QuestionAndResponse(props) {
                 <h1>Add Response</h1>
                 <ResponsderName />
                 <ResponsderComment />
-                <Button/>
+                <Button />
             </div>
         )
     }

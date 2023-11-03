@@ -67,24 +67,17 @@
 
 }
 
-.submit-btn, .resolve-btn {
-  width: 20%;
-  padding: 4px;
-  box-sizing: border-box;
-  background-color: rgb(50, 50, 250);
-  color: white;
-  text-align: center;
-  border-radius: 0.2em;
-  align-self: flex-end;
-  cursor: pointer;
 
-}
 
-.submit-btn:hover, .resolve-btn:hover {
-  background-color: rgb(88, 88, 255);
+/* Question and Response */
+.right-pane .question-and-response,
+.right-pane .question-and-response>div {
+  display: flex;
+  flex-flow: column wrap;
 }
 
 
+/* left pane */
 
 .left-pane {
   display: flex;
@@ -105,20 +98,24 @@
   border-radius: 4px;
 }
 
-/* .submit-btn {
-  background-color: rgb(60, 60, 247);
+
+
+
+/* Buttons */
+.submit-btn, .resolve-btn {
+  width: 20%;
+  padding: 4px;
+  box-sizing: border-box;
+  background-color: rgb(50, 50, 250);
   color: white;
+  text-align: center;
+  border-radius: 0.2em;
+  align-self: flex-end;
   cursor: pointer;
 
-} */
-
-
-/* Question and Response */
-.right-pane .question-and-response,
-.right-pane .question-and-response>div {
-  display: flex;
-  flex-flow: column wrap;
 }
 
-
+.submit-btn:hover, .resolve-btn:hover {
+  background-color: rgb(88, 88, 255);
+}
 
