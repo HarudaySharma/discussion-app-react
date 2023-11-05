@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import RightPane from './components/App_Components/rightPane';
 import LeftPane from './components/App_Components/leftPane';
@@ -21,14 +20,14 @@ function getSubjectIndex(subject, array) {
     }
     return (obj.Subject === subject);
   })
-  console.log(objIndex);
+  // console.log(objIndex);
   return objIndex;
 }
 
 
 function addQuestionToLS(subject, question) {
   let parentArray = fetchFromLocalStorage();
-  console.log(parentArray)
+  // console.log(parentArray)
   let objIndex = getSubjectIndex(subject, parentArray);
   if(objIndex === null) {
     let Obj = {
@@ -54,43 +53,47 @@ function addQuestionToLS(subject, question) {
 
 function App() {
   const [switchComponent, setSwitchComponent] = useState('QF');
-  const [questionArray, setquestionArray] = useState(fetchFromLocalStorage());
+  const [parentArray, setParentArray] = useState(fetchFromLocalStorage());
 
   // will be useful when fetching the responses of the question from local storage
   const [responseKey, setResponseKey] = useState(null);
 
+  useEffect(()=> {
+    console.log(responseKey)
+  },[responseKey])
 
-  const handleQuestionAdd = (subject, question) => {
-    addQuestionToLS(subject, question);
-    setquestionArray(fetchFromLocalStorage());
-  }
-
-  // will update local storage every time new wuestion is added
+// will update local storage every time new wuestion is added
   // useEffect(() => {
   //   updateLocalStorage(questionArray);
   // }, [questionArray])
 
-  useEffect(()=> {
-    console.log(responseKey)
-  },[responseKey])
+  const handleQuestionAdd = (subject, question) => {
+    addQuestionToLS(subject, question);
+    setParentArray(fetchFromLocalStorage());
+  }
 
   const handleQuestionClick = (subject, question) => {
     // console.log(questionHeading)
     setResponseKey({subject: subject, question: question});
     setSwitchComponent('QR');
     // pass this heading to the right pane for fetching the data from local storage
+  }
 
-    
+  // will update the parentArray by fetching the updated one from localStorage
+  const handleResolveClick = () => {
+    setParentArray(fetchFromLocalStorage());
+    setSwitchComponent('QF');
   }
 
   return (
     <div className="App">
-      <LeftPane questionArray={questionArray} handleQuestionClick={handleQuestionClick} setSwitchComponent={setSwitchComponent}/>
+      <LeftPane parentArray={parentArray} handleQuestionClick={handleQuestionClick} setSwitchComponent={setSwitchComponent}/>
       <RightPane
         questionAdd={handleQuestionAdd}
         responseKey={responseKey}
         switchComponent={switchComponent}
         setSwitchComponent={setSwitchComponent}
+        handleResolveClick={handleResolveClick}
       />
     </div>
   );

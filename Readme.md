@@ -71,43 +71,45 @@
 
         - switching b/w different questions(left-pane)  **DONE**
 
-        - Object design updation  => 
+        - Object design updation  => **DONE**
             
 
 // when user submit question and subject => add it to local storage 
 => check if subject is present in the local storage => 
-            Question-Object = {
-              Subject:
-              Questions: [
-                {
-                  question:
-                  responses: [
-                    {
-                      Name:
-                      Comment:
-                    }
-                  ]
-                }
-              ]
-            }
-
-
             Discussion-App [ 
-              {
-                Subject: 
-                Questions: [
-                  {
-                    question:
-                    responses: [
-                      {
-                        Name:
-                        Comment:
-                      }
-                    ]
-                  }
-                ] 
-              }
-            ]
+                          {
+                            Subject: 
+                            Questions: [
+                              {
+                                question:
+                                responses: [
+                                  {
+                                    Name:
+                                    Comment:
+                                  }
+                                ]
+                              }
+                            ] 
+                          }
+                        ]
+
+                    Question-Object = {
+                      Subject:
+                      Questions: [
+                        {
+                          question:
+                          responses: [
+                            {
+                              Name:
+                              Comment:
+                            }
+                          ]
+                        }
+                      ]
+                    }
+
+
+           
 
 
 

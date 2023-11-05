@@ -23,21 +23,30 @@ const fetchObjectFromLS = (key) => {
     return questionObj;
 }
 
+function getSubjectIndex(subject, array) {
+    let subIndex = array.findIndex((obj) => {
+        return (obj.Subject === subject);
+    });
+    return subIndex;
+}
+
+function getQuestionIndex(question, array) {
+    let questionIndex = array.findIndex((obj) => {
+        return (obj.question === question)
+    });
+    return questionIndex;
+}
 
 // will update the question object in local storage by  adding the added responses to the questionObject  
 function updateObjectInLocalStorage(subject , questionObject) {
     let parentArray = JSON.parse(localStorage.getItem('discussion-app'))
 
-    let subIndex = parentArray.findIndex((obj) => {
-        return (obj.Subject === subject);
-    });
+    let subIndex = getSubjectIndex(subject, parentArray);
     let SubjectObj = parentArray[subIndex];
 
 
     // finding the QuestionObject
-    let questionIndex = SubjectObj.Questions.findIndex((obj) => {
-        return (obj.question === questionObject.question)
-    });
+    let questionIndex = getQuestionIndex(questionObject.question, SubjectObj.Questions);
 
     // will update the Questions array in the SubjectObj (new QuestionAdded into the Questions
     // removing the old)
@@ -49,9 +58,23 @@ function updateObjectInLocalStorage(subject , questionObject) {
     localStorage.setItem('discussion-app', JSON.stringify(parentArray));
 }
 
+function deleteObjectInLocalStorage(subject, question) {
+    let parentArray = JSON.parse(localStorage.getItem('discussion-app'));
+
+    let subIndex = getSubjectIndex(subject, parentArray);
+    let questionIndex = getQuestionIndex(question, parentArray[subIndex].Questions);
+
+    parentArray[subIndex].Questions.splice(questionIndex, 1);
+    if(parentArray[subIndex].Questions.length == 0) {
+        parentArray.splice(subIndex, 1);
+    }
+
+    localStorage.setItem('discussion-app', JSON.stringify(parentArray));
+
+}
 
 //responseKey = {subject, question}
-function QuestionAndResponse({ responseKey, setSwitchComponent }) {
+function QuestionAndResponse({ responseKey, handleResolveClick }) {
 
     // questionObject = { question,  responses[]}
     const [questionObject, setQuestionObject] = useState(() => fetchObjectFromLS(responseKey));
@@ -82,6 +105,10 @@ function QuestionAndResponse({ responseKey, setSwitchComponent }) {
 
 
     function Question() {
+        function onResolve() {
+            deleteObjectInLocalStorage(responseKey.subject, questionObject.question);
+            handleResolveClick();
+        }
         return (
             // the values for heading and Paragraph provided by the props
             <div>
@@ -89,7 +116,7 @@ function QuestionAndResponse({ responseKey, setSwitchComponent }) {
                 <p>{questionObject.question}</p>
                 <button
                     className="resolve-btn"
-                    onClick={() => setSwitchComponent('QF')}
+                    onClick={onResolve}
                 >
                     Resolve
                 </button>

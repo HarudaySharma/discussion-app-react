@@ -13,11 +13,11 @@ import QuestionsList from "../Left_Pane_Components/QuestionsList";
 import TopBar from "../Left_Pane_Components/TopBar";
 
 
-function LeftPane({ questionArray, handleQuestionClick, setSwitchComponent }) {
+function LeftPane({ parentArray, handleQuestionClick, setSwitchComponent }) {
     return (
         <div className="left-pane">
             <TopBar setSwitchComponent={setSwitchComponent}/>
-            <QuestionsList parentArray={questionArray} handleQuestionClick={handleQuestionClick} />
+            <QuestionsList parentArray={parentArray} handleQuestionClick={handleQuestionClick} />
         </div>
     )
 }
