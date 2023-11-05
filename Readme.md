@@ -64,4 +64,13 @@
               
 
 
-        Need a communication b/w left and right pane
+        - Need a communication b/w left and right pane  **DONE**
+
+        - resolving the question (done but object need to be changed)
+
+        - switching b/w different questions(left-pane)  **DONE**
+
+        - Object design updation  => 
+
+
+        

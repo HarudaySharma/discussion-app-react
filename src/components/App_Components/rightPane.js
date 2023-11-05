@@ -3,13 +3,12 @@
 import QuestionForm from "../Right_Pane_Components/QuestionForm";
 import QuestionAndResponse from "../Right_Pane_Components/QuestionAndResponse";
 
-function RightPane({ questionArray, switchPane, questionAdd }) {
+function RightPane(props) {
+    
     return (
         <div className="right-pane">
-            {switchPane == -1 ?
-                <QuestionForm questionAdd={questionAdd} /> :
-                <QuestionAndResponse questionArray={questionArray} index={switchPane} />
-            }
+            {props.switchComponent === 'QF' && <QuestionForm questionAdd={props.questionAdd} setSwitchComponent={props.setSwitchComponent}/>}
+            {props.switchComponent === 'QR' && <QuestionAndResponse qSubject={props.qSubject} setSwitchComponent={props.setSwitchComponent} />}
         </div>
     )
 }

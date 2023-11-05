@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 
-function TopBar() {
-    function QuestionFormShowBtn() {
+function TopBar({ setSwitchComponent }) {
+    function QuestionFormShowBtn(props) {
         return (
             // on click will show the Question form in the right pane
-            <button>
+            <button
+                onClick={() => { props.showForm('QF') }}
+            >
                 New Question Form
             </button>
         )
@@ -22,7 +24,7 @@ function TopBar() {
     }
     return (
         <div className="top-bar">
-            <QuestionFormShowBtn />
+            <QuestionFormShowBtn showForm={setSwitchComponent} />
             <SearchQuestions />
         </div>
     )

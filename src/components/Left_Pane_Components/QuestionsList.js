@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 
 
-function QuestionsList({ questionArray, handleQuestionClick}) {
+function QuestionsList({ questionArray, handleQuestionClick }) {
 
-    function QuestionTemplate({ title, content }) {
-        
+    function QuestionTemplate(props) {
+
         return (
-            <div onClick={() => handleQuestionClick(title)}>
-                <h2>{title}</h2>
-                <p>{content}</p>
+            <div onClick={() => handleQuestionClick(props.title)}>
+                <h2>{props.title}</h2>
+                <p>{props.content}</p>
             </div>
         )
     }

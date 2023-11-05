@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-function QuestionForm({ questionAdd }) {
+
+function QuestionForm({ questionAdd, setSwitchComponent }) {
     function Heading() {
         return (
             <div className="heading">
@@ -26,10 +27,8 @@ function QuestionForm({ questionAdd }) {
             <div className="subject-input">
                 <input type="text"
                     placeholder="Subject"
-
                     onChange={(e) => setSubject(e.target.value)}
-                >
-                </input>
+                />
 
                 <textarea
                     placeholder="Question"
@@ -45,6 +44,7 @@ function QuestionForm({ questionAdd }) {
     }
     return (
         <div className="question-form">
+            {/* {} */}
             <Heading />
             <SubjectInput />
         </div>

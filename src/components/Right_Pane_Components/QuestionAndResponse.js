@@ -1,22 +1,58 @@
-import React, { useState, useTransition } from "react";
+import React, { useEffect, useState } from "react";
 
 
-
-function fetchResponsesFromLS(qObj) {
-    if (!localStorage.getItem("Discussion-Form")) {
-        return [];
+// will fetch the questionObject from the Local Storage
+const fetchObjectFromLS = (qSubject) => {
+    if (!localStorage.getItem("discussion-app")) {
+        return null;
     }
-    let allQuestions = JSON.parse(localStorage.getItem("Discussion-Form"))
-    let questionObj = allQuestions.find((obj) => obj.Heading == qObj.Heading);
-    return questionObj.responses;
+    let allQuestions = JSON.parse(localStorage.getItem("discussion-app"))
+    let questionObj = allQuestions.find((obj) => obj.Subject == qSubject);
+    return questionObj;
 }
 
 
+// will update the question object in local storage by  adding the added responses to the questionObject  
+function updateObjectInLocalStorage(object) {
+    let allQuestions = JSON.parse(localStorage.getItem('discussion-app'))
+    let atindex = -1;
+    allQuestions.forEach((obj, index) => {
+        if(obj.Subject == object.Subject) 
+            atindex = index;
+    })
+    allQuestions.splice(atindex, 1, object);
+    localStorage.setItem('discussion-app', JSON.stringify(allQuestions));
+}
 
-function QuestionAndResponse({ questionArray, index }) {
-    const [responseArray, setResponseArray] = useState(fetchResponsesFromLS(questionArray[index]));
-    function Question({ heading }) {
-        function Heading() {
+
+function QuestionAndResponse({ qSubject, setSwitchComponent }) {
+    
+    const [questionObject, setQuestionObject] = useState(() => fetchObjectFromLS(qSubject));
+    const [responses, setResponses]  = useState(() => fetchResponseArray(questionObject));
+
+    const [prevQSubject, setPreviousQSubject] = useState(null)
+    // will fetch all the responses from the questionObject
+    function fetchResponseArray () {
+        console.log('fetchResponserender')
+        return (questionObject.hasOwnProperty('responseArray') ? questionObject.responseArray : [])
+    }
+
+    useEffect(() => {
+        setQuestionObject(fetchObjectFromLS(qSubject));
+    }, [qSubject])
+
+    useEffect(() => {
+        if(qSubject !== prevQSubject) {
+            setResponses(fetchResponseArray(questionObject));
+            setPreviousQSubject(qSubject);
+        }
+        updateObjectInLocalStorage(questionObject);
+    }, [questionObject]);
+
+
+    function Question() {
+
+        function Heading({ heading }) {
             return (
                 <h1>{heading}</h1>
             )
@@ -28,7 +64,9 @@ function QuestionAndResponse({ questionArray, index }) {
         }
         function ResolveBtn() {
             return (
-                <button className="reslove-btn"
+                <button 
+                    className="reslove-btn"
+                    onClick={()=> setSwitchComponent('QF')}
                 >
                     Resolve
                 </button>
@@ -38,18 +76,19 @@ function QuestionAndResponse({ questionArray, index }) {
             // the values for heading and Paragraph provided by the props
             <div>
                 <h1>Question</h1>
-                <Heading heading={questionArray[index].Subject} />
-                <Paragraph text={questionArray[index].Question} />
+                <Heading heading={questionObject.Subject} />
+                <Paragraph text={questionObject.Question} />
                 <ResolveBtn />
             </div>
         )
     }
     function Response() {
-        function ResponseTemplate({ Rname, Rcomment }) {
+        
+        function ResponseTemplate(props) {
             return (
                 <div>
-                    <h4>{Rname}</h4>
-                    <p>{Rcomment}</p>
+                    <h4>{props.name}</h4>
+                    <p>{props.comment}</p>
                 </div>
             )
         }
@@ -57,9 +96,10 @@ function QuestionAndResponse({ questionArray, index }) {
             <div>
                 <h1>Responses</h1>
                 {
-                    responseArray.map((response, index) => {
-                        return <ResponseTemplate key={index} Rname={response.Name} Rcomment={response.Comment} />
-                    })
+                    responses.map((response, index) => {
+                        return <ResponseTemplate key={index} name={response.Name} comment={response.Comment} />
+                    }
+                    )
                 }
             </div>
         )
@@ -70,48 +110,51 @@ function QuestionAndResponse({ questionArray, index }) {
         const [name, setName] = useState('');
         const [comment, setComment] = useState('');
 
-        function addToResponseArray(newResponse) {
-            setResponseArray([...responseArray, newResponse])
-        }
-        function handleRespondSubmit() {
-            let responseObject = {
+        const handleRespondSubmit = () => {
+            if(name == '' || comment == '') return;
+
+            let newResponse = {
                 Name: name,
                 Comment: comment
             }
-            addToResponseArray(responseObject);
+            setResponses([...responses, newResponse]);
+
+            // to add new responses to the question object
+            setQuestionObject({...questionObject, responseArray: [...responses, newResponse]});
+
+            setName('');
+            setComment('');
         }
-        function ResponsderName() {
-            return (
-                <input
-                    type="text"
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Enter Name"
-                >
-                </input>
-            )
-        }
-        function ResponsderComment() {
-            return (
-                <textarea
-                    placeholder="Enter Comment"
-                    onChange={(e) => setComment(e.target.value)}
-                >
-                </textarea>
-            )
-        }
-        function Button() {
-            return (
-                <div className="submit-btn" onclick={handleRespondSubmit} >
-                    Submit
-                </div>
-            )
-        }
+
+        // useEffect(() => {
+        //     setQuestionObject(() => {
+        //         return {...questionObject, responseArray: responses}
+        //     })
+        // }, [responses])
+        
+        // will get executed everytime the questionObject is changed (new responses are added to the object)
+        
+
         return (
             <div>
                 <h1>Add Response</h1>
-                <ResponsderName />
-                <ResponsderComment />
-                <Button />
+                <input
+                    type="text"
+                    placeholder="Enter Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required="required"
+                />
+                <textarea
+                    placeholder="Enter Comment"
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                    required="required"
+                >
+                </textarea>
+                <button className="submit-btn" onClick={handleRespondSubmit} >
+                    Submit
+                </button>
             </div>
         )
     }
@@ -125,3 +168,5 @@ function QuestionAndResponse({ questionArray, index }) {
 }
 
 export default QuestionAndResponse;
+
+
