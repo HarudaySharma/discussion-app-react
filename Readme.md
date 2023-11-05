@@ -1,7 +1,8 @@
 ## Discussion app
-*page divided in -> 2 parts*
-**RightPane** -> 
-                QuestionForm
+### *page divided in -> 2 parts*
+
+#### **RightPane** -> 
+##### QuestionForm
 
                   ->Heading
 
@@ -17,7 +18,7 @@
 
                     -> submit (btn)
 
-                QuestionAndResponse
+ ##### QuestionAndResponse
 
                   -> Question
                     -> heading
@@ -32,16 +33,16 @@
                     -> input name (text)
                     -> input comment (text area)
 
-**LeftPane** ->
-                TopBar
+#### **LeftPane** ->
+ ##### TopBar
 
                   -> New Question Form (btn) (linked with the Question form in right pane)
                   -> Search questions (input box)
 
-                QuestionsList
+ ##### QuestionsList
 
                       -> Subject
-                      -> Question
+                        -> Question
 
 
 
@@ -71,6 +72,46 @@
         - switching b/w different questions(left-pane)  **DONE**
 
         - Object design updation  => 
+            
 
+// when user submit question and subject => add it to local storage 
+=> check if subject is present in the local storage => 
+            Question-Object = {
+              Subject:
+              Questions: [
+                {
+                  question:
+                  responses: [
+                    {
+                      Name:
+                      Comment:
+                    }
+                  ]
+                }
+              ]
+            }
+
+
+            Discussion-App [ 
+              {
+                Subject: 
+                Questions: [
+                  {
+                    question:
+                    responses: [
+                      {
+                        Name:
+                        Comment:
+                      }
+                    ]
+                  }
+                ] 
+              }
+            ]
+
+
+
+Subject
+      Questions: 
 
         

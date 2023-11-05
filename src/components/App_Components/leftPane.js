@@ -17,7 +17,7 @@ function LeftPane({ questionArray, handleQuestionClick, setSwitchComponent }) {
     return (
         <div className="left-pane">
             <TopBar setSwitchComponent={setSwitchComponent}/>
-            <QuestionsList questionArray={questionArray} handleQuestionClick={handleQuestionClick} />
+            <QuestionsList parentArray={questionArray} handleQuestionClick={handleQuestionClick} />
         </div>
     )
 }

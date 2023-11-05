@@ -17,11 +17,11 @@ function QuestionForm({ questionAdd, setSwitchComponent }) {
 
 
         function handleQuestionAdd() {
-            const newQuestion = {
-                Subject: subject,
-                Question: question
-            }
-            questionAdd(newQuestion);
+            // const newQuestion = {
+            //     Subject: subject,
+            //     Question: question
+            // }
+            questionAdd(subject, question);
         }
         return (
             <div className="subject-input">
