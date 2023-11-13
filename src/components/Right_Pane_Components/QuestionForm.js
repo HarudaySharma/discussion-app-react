@@ -36,9 +36,9 @@ function QuestionForm({ questionAdd, setSwitchComponent }) {
                     onChange={(e) => setQuestion(e.target.value)}
                 >
                 </textarea>
-                <div className="submit-btn" onClick={handleQuestionAdd}>
+                <buttton className="submit-btn buttons" onClick={handleQuestionAdd}>
                     Submit
-                </div>
+                </buttton>
             </div>
         )
     }

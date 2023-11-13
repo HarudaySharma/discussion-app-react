@@ -6,28 +6,28 @@ function QuestionsList({ parentArray, handleQuestionClick }) {
     function QuestionTemplate({ subject, question }) {
 
         return (
-            <div onClick={() => {
-                // console.log(question);
-                handleQuestionClick(subject, question)
-            }}>
+            <li className="subject-items question" 
+            onClick={() => handleQuestionClick(subject, question)}>
                {question} 
-            </div>
+            </li>
         )
     }
     function SubjectTemplate({ subjectObj }) {
         return (
-            <div>
+            <div className="subject-container subjects">
                 <h2>{subjectObj.Subject}</h2>
+                <div className="question-list questions">
                 {
                     subjectObj.Questions.map((obj, index) => {
                         return <QuestionTemplate key={index} subject={subjectObj.Subject} question={obj.question} />
                     })
                 }
+                </div>
             </div>
         )
     }
     return (
-        <div className="background-gray">
+        <div className="subject-list">
             {
                 parentArray.map((obj, index) => {
                     return <SubjectTemplate key={index} subjectObj={obj} />

@@ -5,6 +5,7 @@ function TopBar({ setSwitchComponent }) {
         return (
             // on click will show the Question form in the right pane
             <button
+                className="form-btn buttons"
                 onClick={() => { props.showForm('QF') }}
             >
                 New Question Form
@@ -16,6 +17,7 @@ function TopBar({ setSwitchComponent }) {
         const [inputValue, setInputValue] = useState('');
         return (
             <input
+                className="search-box"
                 type="text"
                 placeholder="search questions..."
                 onChange={(e) => setInputValue(e.target.value)}

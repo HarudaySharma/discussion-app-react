@@ -111,11 +111,11 @@ function QuestionAndResponse({ responseKey, handleResolveClick }) {
         }
         return (
             // the values for heading and Paragraph provided by the props
-            <div>
+            <div className="question-resolve-container">
                 <h1>{responseKey.subject}</h1>
                 <p>{questionObject.question}</p>
                 <button
-                    className="resolve-btn"
+                    className="resolve-btn buttons"
                     onClick={onResolve}
                 >
                     Resolve
@@ -134,7 +134,7 @@ function QuestionAndResponse({ responseKey, handleResolveClick }) {
             )
         }
         return (
-            <div>
+            <div className="response-container">
                 <h1>Responses</h1>
                 {
                     responses.map((response, index) => {
@@ -181,7 +181,7 @@ function QuestionAndResponse({ responseKey, handleResolveClick }) {
 
 
         return (
-            <div>
+            <div className="add-response-container">
                 <h1>Add Response</h1>
                 <input
                     type="text"
@@ -197,7 +197,7 @@ function QuestionAndResponse({ responseKey, handleResolveClick }) {
                     required="required"
                 >
                 </textarea>
-                <button className="submit-btn" onClick={handleRespondSubmit} >
+                <button className="submit-btn buttons" onClick={handleRespondSubmit} >
                     Submit
                 </button>
             </div>
