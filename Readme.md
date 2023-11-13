@@ -122,4 +122,4 @@ Subject
   - updating the code so that the local storage get accessed and modified at root component(<app/>)only
   - Adding the search function
   - Setting the display priority of responses based on their likes count(setting a like function with responses)
-  -  
+  - 

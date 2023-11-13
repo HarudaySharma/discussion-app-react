@@ -9,14 +9,14 @@ const fetchObjectFromLS = (key) => {
     let parentArray = JSON.parse(localStorage.getItem("discussion-app"))
 
     //finding the subject Object which contains all the questions regarding the subject
-    let subIndex = parentArray.findIndex((obj) =>  {
+    let subIndex = parentArray.findIndex((obj) => {
         return (obj.Subject === key.subject);
     });
     let subjectObj = parentArray[subIndex];
     // questionArray traversal to find the question 
 
     let questionIndex = subjectObj.Questions.findIndex((obj) => obj.question === key.question)
-    
+
     let questionObj = subjectObj.Questions[questionIndex];
     // this will return the questionObj which will have the responses (question and responses)
 
@@ -38,7 +38,7 @@ function getQuestionIndex(question, array) {
 }
 
 // will update the question object in local storage by  adding the added responses to the questionObject  
-function updateObjectInLocalStorage(subject , questionObject) {
+function updateObjectInLocalStorage(subject, questionObject) {
     let parentArray = JSON.parse(localStorage.getItem('discussion-app'))
 
     let subIndex = getSubjectIndex(subject, parentArray);
@@ -65,7 +65,7 @@ function deleteObjectInLocalStorage(subject, question) {
     let questionIndex = getQuestionIndex(question, parentArray[subIndex].Questions);
 
     parentArray[subIndex].Questions.splice(questionIndex, 1);
-    if(parentArray[subIndex].Questions.length == 0) {
+    if (parentArray[subIndex].Questions.length == 0) {
         parentArray.splice(subIndex, 1);
     }
 
@@ -127,7 +127,7 @@ function QuestionAndResponse({ responseKey, handleResolveClick }) {
 
         function ResponseTemplate(props) {
             return (
-                <div>
+                <div className="response">
                     <h4>{props.name}</h4>
                     <p>{props.comment}</p>
                 </div>
@@ -136,12 +136,15 @@ function QuestionAndResponse({ responseKey, handleResolveClick }) {
         return (
             <div className="response-container">
                 <h1>Responses</h1>
-                {
-                    responses.map((response, index) => {
-                        return <ResponseTemplate key={index} name={response.Name} comment={response.Comment} />
+                <div className="response-list">
+                    {responses.length == 0 && <div>No Responses</div>}
+                    {
+                        responses.map((response, index) => {
+                            return <ResponseTemplate key={index} name={response.Name} comment={response.Comment} />
+                        }
+                        )
                     }
-                    )
-                }
+                </div>
             </div>
         )
     }
