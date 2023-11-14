@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { debounce } from "lodash";
 
-function TopBar({ setSwitchComponent }) {
+
+
+function TopBar({ handleQuestionSearch, setSwitchComponent }) {
     function QuestionFormShowBtn(props) {
         return (
             // on click will show the Question form in the right pane
@@ -15,12 +18,26 @@ function TopBar({ setSwitchComponent }) {
 
     function SearchQuestions() {
         const [inputValue, setInputValue] = useState('');
+        // Debounce the handleQuestionSearch function
+        const debouncedSearch = debounce((value) => handleQuestionSearch(value), 3000);
+
+        useEffect(() => {
+            // Trigger the debounced search function when inputValue changes
+            debouncedSearch(inputValue.trim().toLowerCase());
+        }, [inputValue])
+
+
+        function handleSearchInputChange(e) {
+            setInputValue(e.target.value);
+        }
+
         return (
             <input
                 className="search-box"
                 type="text"
                 placeholder="search questions..."
-                onChange={(e) => setInputValue(e.target.value)}
+                value={inputValue}
+                onChange={handleSearchInputChange}
             />
         )
     }

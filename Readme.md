@@ -123,3 +123,30 @@ Subject
   - Adding the search function
   - Setting the display priority of responses based on their likes count(setting a like function with responses)
   - 
+
+
+searching :- 
+
+    question
+      -> match with questions available 
+        -> how ?
+          create a new array of subjects 
+            will contain only the matching questions with their subjects
+              how ?
+
+                - create dummy array
+                - traverse thorugh the parent array
+                    traverse through the question array of each element
+                        store the matched questions into a new array
+                      if(array.lenght != 0) {
+                        dummyarray.push(
+                                        {Subject: subject,
+                                        Questions: questionArray}
+                                      )
+                    }
+
+
+            **Still need fixes**
+
+
+

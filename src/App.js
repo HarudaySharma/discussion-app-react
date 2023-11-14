@@ -1,7 +1,7 @@
 import './App.css';
 import RightPane from './components/App_Components/rightPane';
 import LeftPane from './components/App_Components/leftPane';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 
 function fetchFromLocalStorage() {
@@ -15,7 +15,7 @@ function updateLocalStorage(parentArray) {
 function getSubjectIndex(subject, array) {
   let objIndex = null;
   array.find((obj, index) => {
-    if(obj.Subject === subject) {
+    if (obj.Subject === subject) {
       objIndex = index;
     }
     return (obj.Subject === subject);
@@ -29,17 +29,17 @@ function addQuestionToLS(subject, question) {
   let parentArray = fetchFromLocalStorage();
   // console.log(parentArray)
   let objIndex = getSubjectIndex(subject, parentArray);
-  if(objIndex === null) {
+  if (objIndex === null) {
     let Obj = {
       Subject: subject,
       Questions: [{
-        question: question, 
+        question: question,
         responses: []
       }]
     }
     parentArray.push(Obj);
   }
-  else  {
+  else {
     let ques = {
       question: question,
       responses: []
@@ -55,14 +55,19 @@ function App() {
   const [switchComponent, setSwitchComponent] = useState('QF');
   const [parentArray, setParentArray] = useState(fetchFromLocalStorage());
 
+  // used for search functionality
+  const [filteredArray, setFilteredArray] = useState(parentArray);
   // will be useful when fetching the responses of the question from local storage
   const [responseKey, setResponseKey] = useState(null);
 
-  useEffect(()=> {
+  useEffect(() => {
     console.log(responseKey)
-  },[responseKey])
+  }, [responseKey]);
 
-// will update local storage every time new wuestion is added
+  useEffect(() => {
+    setFilteredArray(parentArray);
+  }, [parentArray]);
+  // will update local storage every time new wuestion is added
   // useEffect(() => {
   //   updateLocalStorage(questionArray);
   // }, [questionArray])
@@ -74,7 +79,7 @@ function App() {
 
   const handleQuestionClick = (subject, question) => {
     // console.log(questionHeading)
-    setResponseKey({subject: subject, question: question});
+    setResponseKey({ subject: subject, question: question });
     setSwitchComponent('QR');
     // pass this heading to the right pane for fetching the data from local storage
   }
@@ -85,9 +90,31 @@ function App() {
     setSwitchComponent('QF');
   }
 
+  const handleQuestionSearch = (inputValue) => {
+
+    const tempArray = parentArray.map((obj) => {
+
+      let qArr = obj.Questions.filter((ele) => ele.question.toLowerCase().includes(inputValue));
+
+      if (qArr.length !== 0) {
+        return {
+          Subject: obj.Subject,
+          Questions: qArr
+        };
+      }
+
+      return null;
+
+    }).filter(Boolean);
+
+    // console.log(tempArray);
+    setFilteredArray(tempArray);
+
+  }
+
   return (
     <div className="App">
-      <LeftPane parentArray={parentArray} handleQuestionClick={handleQuestionClick} setSwitchComponent={setSwitchComponent}/>
+      <LeftPane filteredArray={filteredArray} handleQuestionSearch={handleQuestionSearch} handleQuestionClick={handleQuestionClick} setSwitchComponent={setSwitchComponent} />
       <RightPane
         questionAdd={handleQuestionAdd}
         responseKey={responseKey}
