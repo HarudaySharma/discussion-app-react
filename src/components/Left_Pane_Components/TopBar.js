@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { debounce } from "lodash";
 
 
 
-function TopBar({ handleQuestionSearch, setSwitchComponent }) {
+/* 
+ - used memo to ensure that the component only renders when it's props(props value) is changed
+ - handleQuestionSearch(App component function) is wrapped around CallBack hook to ensure that
+   it's reference is not changed when the App comp. re-renders.
+ - re-render of TopBar comp. on each App render would make the Search functionality cease to work.
+    (beacuse as the comp. renders every time the search input get refreshed and is not able to get new values from the user)
+*/
+
+// TopBar should be render initially only
+const TopBar = React.memo(({ handleQuestionSearch, setSwitchComponent }) => {
+    console.log("TopBar render")
     function QuestionFormShowBtn(props) {
         return (
             // on click will show the Question form in the right pane
@@ -16,18 +25,16 @@ function TopBar({ handleQuestionSearch, setSwitchComponent }) {
         )
     }
 
+
     function SearchQuestions() {
         const [inputValue, setInputValue] = useState('');
-        // Debounce the handleQuestionSearch function
-        const debouncedSearch = debounce((value) => handleQuestionSearch(value), 3000);
-
+      
         useEffect(() => {
-            // Trigger the debounced search function when inputValue changes
-            debouncedSearch(inputValue.trim().toLowerCase());
-        }, [inputValue])
-
+            handleQuestionSearch(inputValue);
+        }, [inputValue]);
 
         function handleSearchInputChange(e) {
+            e.preventDefault();
             setInputValue(e.target.value);
         }
 
@@ -47,6 +54,6 @@ function TopBar({ handleQuestionSearch, setSwitchComponent }) {
             <SearchQuestions />
         </div>
     )
-}
+})
 
 export default TopBar;

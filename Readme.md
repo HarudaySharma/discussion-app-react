@@ -111,21 +111,10 @@
 
            
 
-
-
-Subject
-      Questions: 
-
         
-**Work Left to be done**
-  - Usking useContext hook for passing the parentArray
-  - updating the code so that the local storage get accessed and modified at root component(<app/>)only
-  - Adding the search function
-  - Setting the display priority of responses based on their likes count(setting a like function with responses)
-  - 
 
 
-searching :- 
+### **searching** :- 
 
     question
       -> match with questions available 
@@ -146,7 +135,34 @@ searching :-
                     }
 
 
-            **Still need fixes**
+
+### on addition of response =>
+   store the responses locally till something changes => {
+    don't update the state of the parent Array of the root component
+    if(right-pane != 'QR' || responseKey Changed) {
+      update parent Array State
+    }
+  }
+
+  reason -> (to halt unresonable re-renders) with addition of a response the root component re-renders, but is in term not necessary
+              
+
+###  What I want to achieve =>
+    => I want to make sure that the localstorage gets updated only when parent-Array is changed
+    => Don't want unneccessary parentArray state changes : 
+        - prevent frequent re-renders
+        - prevent frequent updation of localStorage
+
+##### **Problem Solved**
+        - Changes to local storage is being done by the App component only
+##### **Problem Arising**
+      => - useEffect hook is not working as aspected for parentArray state  
+              - had to explicitly call the updateLocalStorage fnc 
 
 
-
+#### Work left => 
+  - Save the newly added responses when newQuestionFrom btn is clicked
+  - Usking useContext hook for passing the parentArray
+  - updating the code so that the local storage get accessed and modified at root component(<app/>)only
+  - Adding the search function
+  - Setting the display priority of responses based on their likes count(setting a like function with responses)

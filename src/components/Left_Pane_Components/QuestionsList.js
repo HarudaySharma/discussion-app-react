@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+// import React from "react";
 
 
 function QuestionsList({ filteredArray, handleQuestionClick }) {
+    const array = filteredArray;
 
     function QuestionTemplate({ subject, question }) {
 
@@ -29,12 +30,9 @@ function QuestionsList({ filteredArray, handleQuestionClick }) {
     return (
         <div className="subject-list">
             {
-                filteredArray.map((obj, index) => {
+                array.map((obj, index) => {
                     return <SubjectTemplate key={index} subjectObj={obj} />
                 })
-                // questionArray.map((object, index) => {
-                //     return <QuestionTemplate key={index} title={object.Subject} content={object.Question} />
-                // })
             }
         </div>
     )

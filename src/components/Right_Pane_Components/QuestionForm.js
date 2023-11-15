@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 
-function QuestionForm({ questionAdd, setSwitchComponent }) {
+function QuestionForm({ handleQuestionAdd, setSwitchComponent }) {
     function Heading() {
         return (
             <div className="heading">
@@ -16,12 +16,12 @@ function QuestionForm({ questionAdd, setSwitchComponent }) {
         const [question, setQuestion] = useState('');
 
 
-        function handleQuestionAdd() {
+        function onButtonCLick() {
             // const newQuestion = {
             //     Subject: subject,
             //     Question: question
             // }
-            questionAdd(subject, question);
+            handleQuestionAdd(subject, question);
         }
         return (
             <div className="subject-input">
@@ -36,7 +36,7 @@ function QuestionForm({ questionAdd, setSwitchComponent }) {
                     onChange={(e) => setQuestion(e.target.value)}
                 >
                 </textarea>
-                <button type="button" className="submit-btn buttons" onClick={handleQuestionAdd}>
+                <button type="button" className="submit-btn buttons" onClick={onButtonCLick}>
                     Submit
                 </button>
             </div>

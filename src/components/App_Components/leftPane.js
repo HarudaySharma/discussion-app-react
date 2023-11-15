@@ -8,12 +8,13 @@
 //                       -> Question
 
 
-
 import QuestionsList from "../Left_Pane_Components/QuestionsList";
 import TopBar from "../Left_Pane_Components/TopBar";
 
 
-function LeftPane({ filteredArray, handleQuestionSearch, handleQuestionClick, setSwitchComponent }) {
+
+function LeftPane({filteredArray, handleQuestionSearch, handleQuestionClick, setSwitchComponent }) {
+
     return (
         <div className="left-pane">
             <TopBar handleQuestionSearch={handleQuestionSearch} setSwitchComponent={setSwitchComponent}/>
